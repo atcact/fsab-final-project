@@ -69,7 +69,7 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
               <Select required name="workout" placeholder='Select workout'>
                 <option value='running'>Running</option>
                 <option value='cycling'>Cycling</option>
-                <option value='weightlifting'>Rowing</option>
+                <option value='weightlifting'>Weightlifting</option>
                 <option value='swimming'>Swimming</option>
                 <option value='rowing'>Rowing</option>
               </Select>

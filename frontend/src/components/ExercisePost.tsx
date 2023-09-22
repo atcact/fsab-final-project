@@ -1,6 +1,6 @@
 import { Box, Divider, Text, VStack } from "@chakra-ui/react";
 
-interface Props {
+interface ExerciseProps {
   title: string;
   workout: string;
   time: number;
@@ -8,7 +8,7 @@ interface Props {
   postedAt: Date;
 }
 
-const Post = ({ title, workout, time, body, postedAt }: Props) => {
+const ExercisePost = ({ title, workout, time, body, postedAt }: ExerciseProps) => {
   // TODO: Implement a component representing an already existing post
   return (
     <Box width="100%" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -32,4 +32,5 @@ const Post = ({ title, workout, time, body, postedAt }: Props) => {
   );
 };
 
-export default Post;
+
+export default ExercisePost;
