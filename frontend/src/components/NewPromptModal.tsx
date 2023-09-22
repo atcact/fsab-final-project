@@ -18,6 +18,8 @@ import {
 } from '@chakra-ui/react';
 import axios from "axios";
 
+// require("dotenv").config();
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -35,7 +37,7 @@ const NewPromptModal = ({ isOpen, onClose }: Props) => {
     // Set isLoading to true while we make the API request.
     setIsLoading(true);
 
-    var workoutPrompt = `I'm ${e.target.ft.value} ft ${e.target.in.value} in and ${e.target.in.lbs.value} lbs.`;
+    var workoutPrompt = `I'm ${e.target.ft.value} ft ${e.target.in.value} in and ${e.target.lbs.value} lbs.`;
     workoutPrompt += ` My fitness goal is: ${e.target.goal.value}. Suggest me a simple workout plan.`;
     
     const options = {
@@ -57,7 +59,8 @@ const NewPromptModal = ({ isOpen, onClose }: Props) => {
     axios
       .request(options)
       .then(function (response) {
-        setLLMOutput(response.data.generations.text);
+        console.log(response.data)
+        setLLMOutput(response.data.generations[0].text);
       })
       .catch(function (error) {
         console.error(error);
