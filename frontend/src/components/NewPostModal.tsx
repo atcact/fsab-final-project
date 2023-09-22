@@ -82,7 +82,7 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
                     <NumberDecrementStepper />
                   </NumberInputStepper>
                 </NumberInput>
-                <Box>in</Box>
+                <Box>minutes</Box>
               </SimpleGrid>
               <Textarea required name="body" placeholder="Note" />
             </VStack>
