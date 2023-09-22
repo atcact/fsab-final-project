@@ -8,7 +8,7 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import { Button, Input, Textarea, VStack, Select } from "@chakra-ui/react";
+import { Button, Input, Textarea, VStack, SimpleGrid, Box } from "@chakra-ui/react";
 import {
   NumberInput,
   NumberInputField,
@@ -96,28 +96,44 @@ const NewPromptModal = ({ isOpen, onClose }: Props) => {
           <ModalBody>
             <VStack spacing={2}>
               <text>Height</text>
-              <NumberInput step={1} defaultValue={5} min={1} max={10}>
-                <NumberInputField required name="ft" placeholder="ft"/>
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              <NumberInput step={1} defaultValue={8} min={0} max={12}>
-                <NumberInputField required name="in" placeholder="in"/>
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
+              <SimpleGrid columns={2} spacing={5}>
+                <NumberInput step={1} defaultValue={5} min={1} max={10}>
+                  <NumberInputField required name="ft" placeholder="ft"/>
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+                <Box>ft</Box>
+              </SimpleGrid>
+              <SimpleGrid columns={2} spacing={5}>
+                <NumberInput step={1} defaultValue={8} min={0} max={12}>
+                  <NumberInputField required name="in" placeholder="in"/>
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+                <Box>in</Box>
+              </SimpleGrid>
               <text>Weight</text>
-              <NumberInput step={1} defaultValue={150} min={1} max={500}>
+              <SimpleGrid columns={2} spacing={5}>
+                <NumberInput step={1} defaultValue={150} min={1} max={500}>
+                  <NumberInputField required name="lbs" placeholder="lbs"/>
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+                <Box>lbs</Box>
+              </SimpleGrid>
+              {/* <NumberInput step={1} defaultValue={150} min={1} max={500}>
                 <NumberInputField required name="lbs" placeholder="lbs"/>
                 <NumberInputStepper>
                   <NumberIncrementStepper />
                   <NumberDecrementStepper />
                 </NumberInputStepper>
-              </NumberInput>
+              </NumberInput> */}
               <text>Describe your desired fitness:</text>
               <Textarea required name="goal"/>
             </VStack>

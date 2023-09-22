@@ -49,8 +49,7 @@ export default function Home() {
   function getSuggestion() {
     // Set isLoading to true while we make the API request.
     setIsLoading(true);
-
-    // TODO: Make a POST request with the form data to the /posts endpoint
+    
     axios
       .get("http://localhost:8080/suggestions", {})
       .then(function (response) {
