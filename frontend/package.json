@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "idol": "next build && next start",
+    "watch": "watch 'npm run build' ./src/components"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",
@@ -22,6 +24,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "tailwindcss": "3.3.3",
-    "typescript": "5.2.2"
+    "typescript": "5.2.2",
+    "watch": "^1.0.2"
   }
 }

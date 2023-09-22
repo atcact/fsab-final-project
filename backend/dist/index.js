@@ -15,30 +15,43 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mongodb_1 = require("mongodb");
 const body_parser_1 = __importDefault(require("body-parser"));
+const cors_1 = __importDefault(require("cors"));
 require("dotenv").config();
 const app = (0, express_1.default)();
 const port = 8080; // default port to listen
 let db;
 // middleware
+app.use((0, cors_1.default)({
+    origin: 'http://localhost:3000'
+}));
 app.use(express_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 // Route definitions
+app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    return res.send("Welcome to Workout Tracker!");
+}));
 // TODO: Implement a route handler that returns a list of all posts, ordered by date created.
-app.get("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get("/exercises", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // res.send("TODO: GET /posts");
-    const collection = db.collection("posts");
+    const collection = db.collection("exercises");
     const result = yield collection.find({}).toArray();
     return res.json(result);
 }));
 // TODO: Implement a route handler that creates a new post.
-app.post("/posts", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post("/exercises", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // res.send("TODO: POST /posts");
     const postBodyData = req.body;
-    const collection = db.collection("posts");
-    const newPost = { title: postBodyData.title, body: postBodyData.body, createdAt: new Date() };
+    const collection = db.collection("exercises");
+    const newExercise = {
+        title: postBodyData.title,
+        workout: postBodyData.workout,
+        time: postBodyData.time,
+        body: postBodyData.body,
+        createdAt: new Date()
+    };
     try {
-        yield collection.insertOne(newPost);
-        return res.json(newPost);
+        yield collection.insertOne(newExercise);
+        return res.json(newExercise);
     }
     catch (e) {
         return res.status(500).send();

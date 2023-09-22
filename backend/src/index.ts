@@ -19,27 +19,33 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Route definitions
 app.get("/", async (req, res) => {
-  return res.send("Hello, world!");
+  return res.send("Welcome to Workout Tracker!");
 });
 
 // TODO: Implement a route handler that returns a list of all posts, ordered by date created.
-app.get("/posts", async (req, res) => {
+app.get("/exercises", async (req, res) => {
     // res.send("TODO: GET /posts");
 
-    const collection = db.collection("posts");
+    const collection = db.collection("exercises");
     const result = await collection.find({}).toArray()
     return res.json(result);
 });
 
 // TODO: Implement a route handler that creates a new post.
-app.post("/posts", async (req, res) => {
+app.post("/exercises", async (req, res) => {
     // res.send("TODO: POST /posts");
     const postBodyData = req.body;
-    const collection = db.collection("posts");
-    const newPost = {title: postBodyData.title, body: postBodyData.body, createdAt: new Date()};
+    const collection = db.collection("exercises");
+    const newExercise = {
+        title: postBodyData.title,
+        workout: postBodyData.workout,
+        time: postBodyData.time,
+        body: postBodyData.body,
+        createdAt: new Date()
+    };
     try {
-        await collection.insertOne(newPost);
-        return res.json(newPost);
+        await collection.insertOne(newExercise);
+        return res.json(newExercise);
     } catch (e) {
         return res.status(500).send();
     }

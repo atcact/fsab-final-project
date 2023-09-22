@@ -8,7 +8,14 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/modal";
-import { Button, Input, Textarea, VStack } from "@chakra-ui/react";
+import { Button, Input, Textarea, VStack, Select } from "@chakra-ui/react";
+import {
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+} from '@chakra-ui/react';
 import axios from "axios";
 
 interface Props {
@@ -19,6 +26,7 @@ interface Props {
 const NewPostModal = ({ isOpen, onClose }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
+
   function handleSubmit(e: any) {
     // Block the default form handler behavior.
     e.preventDefault();
@@ -26,10 +34,11 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
     // Set isLoading to true while we make the API request.
     setIsLoading(true);
 
-    // TODO: Make a POST request with the form data to the /posts endpoint
     axios
-      .post("http://localhost:8080/posts", {
-        title: e.target.name.value,
+      .post("http://localhost:8080/exercises", {
+        title: e.target.title.value,
+        workout: e.target.workout.value,
+        time: e.target.time.value,
         body: e.target.body.value,
       })
       .then(function (response) {
@@ -46,18 +55,33 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
       });
   }
 
-  // TODO: Implement a modal for creating a new post
+
   return (
     <Modal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <form onSubmit={handleSubmit}>
         <ModalContent>
-          <ModalHeader>Create new post</ModalHeader>
+          <ModalHeader>Add new workout</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={2}>
-              <Input required name="title" placeholder="Post title" />
-              <Textarea required name="body" placeholder="Post body" />
+              {/* <Input required name="title" placeholder=" title" /> */}
+              <Select required name="workout" placeholder='Select workout'>
+                <option value='running'>Running</option>
+                <option value='cycling'>Cycling</option>
+                <option value='weightlifting'>Rowing</option>
+                <option value='swimming'>Swimming</option>
+                <option value='rowing'>Rowing</option>
+              </Select>
+              <text>Duration</text>
+              <NumberInput step={5} defaultValue={15} min={5} max={60}>
+                <NumberInputField required name="time" placeholder="minutes"/>
+                <NumberInputStepper>
+                  <NumberIncrementStepper />
+                  <NumberDecrementStepper />
+                </NumberInputStepper>
+              </NumberInput>
+              <Textarea required name="body" placeholder="Note" />
             </VStack>
           </ModalBody>
           <ModalFooter>
