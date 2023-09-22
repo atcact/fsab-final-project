@@ -12,6 +12,7 @@ export default function Home() {
   const [newPrompt, setNewPrompt] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [items, setItems] = useState<any[]>([]);
+  const [promptItems, setPromptItems] = useState<any[]>([]);
 
   function getPost() {
     // Set isLoading to true while we make the API request.
@@ -53,7 +54,7 @@ export default function Home() {
     axios
       .get("http://localhost:8080/suggestions", {})
       .then(function (response) {
-        setItems(response.data);
+        setPromptItems(response.data);
       })
       .catch(function (error) {
         // handle error
@@ -68,7 +69,7 @@ export default function Home() {
     getSuggestion();
   }, []);
 
-  const listSuggestions = items.map((suggestion) =>
+  const listSuggestions = promptItems.map((suggestion) =>
     <SuggestionPost
       ft={suggestion.ft}
       inch={suggestion.in}
