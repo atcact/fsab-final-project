@@ -10,13 +10,11 @@ The Workout Tracker is a user-friendly platform designed to help individuals ach
 ## Installation
 Clone the repository:
 
-> git clone https://github.com/atcact/fsab-final-project.git
+```bash
+git clone https://github.com/atcact/workout-tracker.git
+```
 
 Navigate to the project directory:
-
-> cd workout-tracker/frontend
-> npm install
-> npm run start
 
 ```bash
 cd workout-tracker/frontend
