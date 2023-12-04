@@ -13,11 +13,16 @@ Clone the repository:
 > git clone https://github.com/atcact/fsab-final-project.git
 
 Navigate to the project directory:
-'''
+
 > cd workout-tracker/frontend
 > npm install
 > npm run start
-'''
+
+```bash
+cd workout-tracker/frontend
+npm install
+npm run start
+```
 Open your web browser and visit http://localhost:3000 to access the app.
 
 ## Usage
