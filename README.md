@@ -14,7 +14,7 @@ Clone the repository:
 
 Navigate to the project directory:
 
-> cd fsab-final-project/frontend
+> cd workout-tracker/frontend
 > npm install
 > npm run start
 
