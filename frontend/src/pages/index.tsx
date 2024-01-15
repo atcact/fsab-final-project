@@ -1,4 +1,5 @@
-import {Button, Container, HStack, Spacer, Text, VStack, Input} from "@chakra-ui/react"
+
+import {Button, Container, HStack, Spacer, Text, VStack, Input, Grid, GridItem, Box, Flex, Link} from "@chakra-ui/react"
 import { useState, useEffect } from "react";
 import NewPostModal from "@/components/NewPostModal";
 import NewPromptModal from "@/components/NewPromptModal";
@@ -7,7 +8,7 @@ import SuggestionPost from "@/components/SuggestionPost";
 import axios from "axios";
 
 
-export default function Home() {
+export default function HomePage() {
   const [newPostDialog, setNewPostDialog] = useState(false);
   const [newPrompt, setNewPrompt] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function Home() {
     axios
       .get("http://localhost:8080/exercises", {})
       .then(function (response) {
-        setItems(response.data);
+        setItems(response.data.reverse());
       })
       .catch(function (error) {
         // handle error
@@ -36,14 +37,15 @@ export default function Home() {
   useEffect(() => {
     getPost();
   }, []);
-
+  
   const listPosts = items.map((post) =>
     <ExercisePost
+      _id={post._id}
       title={post.title}
       workout={post.workout}
       time={post.time}
       body={post.body}
-      postedAt={post.postedAt}
+      postedAt={post.createdAt}
     />
   );
 
@@ -54,7 +56,7 @@ export default function Home() {
     axios
       .get("http://localhost:8080/suggestions", {})
       .then(function (response) {
-        setPromptItems(response.data);
+        setPromptItems(response.data.reverse());
       })
       .catch(function (error) {
         // handle error
@@ -71,6 +73,7 @@ export default function Home() {
 
   const listSuggestions = promptItems.map((suggestion) =>
     <SuggestionPost
+      _id={suggestion._id}
       ft={suggestion.ft}
       inch={suggestion.in}
       lbs={suggestion.lbs}
@@ -90,22 +93,59 @@ export default function Home() {
         isOpen={newPrompt}
         onClose={() => setNewPrompt(false)}
       />
-      <Container maxW="container.sm">
-        <HStack my={10}>
-          <Text fontSize="5xl" fontWeight={800}>
-            Workout Tracker
-          </Text>
-          <Spacer />
-          <Button onClick={() => setNewPrompt(true)}>Workout Suggestion</Button>
-          <Spacer />
-          <Button onClick={() => setNewPostDialog(true)}>New</Button>
-        </HStack>
+      <Grid
+          templateRows='repeat(8, 1fr)'
+          templateColumns='repeat(4, 1fr)'
+          h='200px'
+          gap='4'
+        >
+          <GridItem rowSpan={1} colSpan={4}>
+              {/* <Box bg="teal.500" p={4} color="white">
+              <Flex align="center">
+                <Link as={RouterLink} to="/">
+                  <Text fontSize="xl" fontWeight="bold">
+                    Your Logo
+                  </Text>
+                </Link>
+                <Spacer />
+                <VStack spacing={4} direction="row">
+                  <Link as={RouterLink} to="/">
+                    Home
+                  </Link>
+                  <Link as={RouterLink} to="/about">
+                    About
+                  </Link>
+                </VStack>
+              </Flex>
+            </Box>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/about" component={AboutPage} />
+              </Switch>
+            </Router> */}
+            <Text fontSize="5xl" fontWeight={800} align={"center"}>
+              Workout Tracker
+            </Text>
+          </GridItem>
+          <GridItem colSpan={2}>
+            <VStack width="100%">
+              <Button onClick={() => setNewPrompt(true)}>Workout Suggestion</Button>
+              {listSuggestions}
+          </VStack>
+          </GridItem>
+          <GridItem colSpan={2}>
+              <VStack width="100%">
+                <Button onClick={() => setNewPostDialog(true)}>New</Button>
+                {listPosts}
+              </VStack>
+          </GridItem>
+          <GridItem rowSpan={1} colSpan={4}>
+            Footer
+          </GridItem>
+      </Grid>
 
-        <VStack width="100%">
-            {listSuggestions}
-            {listPosts}
-        </VStack>
-      </Container>
     </div>
   );
 }

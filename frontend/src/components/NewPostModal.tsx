@@ -43,6 +43,7 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
       })
       .then(function (response) {
         // handle success
+        console.log("Success:", response.data._id.toString());
         onClose();
         window.location.reload();
       })
@@ -65,13 +66,16 @@ const NewPostModal = ({ isOpen, onClose }: Props) => {
           <ModalCloseButton />
           <ModalBody>
             <VStack spacing={2}>
-              {/* <Input required name="title" placeholder=" title" /> */}
               <Select required name="workout" placeholder='Select workout'>
                 <option value='Running'>Running</option>
                 <option value='Cycling'>Cycling</option>
                 <option value='Weightlifting'>Weightlifting</option>
                 <option value='Swimming'>Swimming</option>
                 <option value='Rowing'>Rowing</option>
+                <option value='Skating'>Skating</option>
+                <option value='Dancing'>Dancing</option>
+                <option value='Yoga'>Yoga</option>
+                <option value='Cardio'>Cardio</option>
               </Select>
               <text>Duration</text>
               <SimpleGrid columns={2} spacing={5}>

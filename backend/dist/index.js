@@ -19,6 +19,7 @@ const cors_1 = __importDefault(require("cors"));
 require("dotenv").config();
 const app = (0, express_1.default)();
 const port = 8080; // default port to listen
+// const ObjectId = require('mongodb').ObjectID;
 let db;
 // middleware
 app.use((0, cors_1.default)({
@@ -53,6 +54,18 @@ app.post("/exercises", (req, res) => __awaiter(void 0, void 0, void 0, function*
         return res.status(500).send();
     }
 }));
+app.delete("/exercises/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = { _id: new mongodb_1.ObjectId(req.params.id) };
+    const collection = db.collection("exercises");
+    try {
+        console.log("deleting post with id ", req.params.id);
+        yield collection.deleteOne(query);
+        return res.status(200).send();
+    }
+    catch (e) {
+        return res.status(500).send();
+    }
+}));
 app.get("/suggestions", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const collection = db.collection("suggestions");
     const result = yield collection.find({}).toArray();
@@ -71,7 +84,20 @@ app.post("/suggestions", (req, res) => __awaiter(void 0, void 0, void 0, functio
     };
     try {
         yield collection.insertOne(newPrompt);
+        console.log("inserted new prompt");
         return res.json(newPrompt);
+    }
+    catch (e) {
+        return res.status(500).send();
+    }
+}));
+app.delete("/suggestions/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const query = { _id: new mongodb_1.ObjectId(req.params.id) };
+    const collection = db.collection("suggestions");
+    try {
+        console.log("deleting suggestion with id ", req.params.id);
+        yield collection.deleteOne(query);
+        return res.status(200).send();
     }
     catch (e) {
         return res.status(500).send();

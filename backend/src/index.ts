@@ -7,6 +7,8 @@ require("dotenv").config();
 
 const app = express();
 const port = 8080; // default port to listen
+// const ObjectId = require('mongodb').ObjectID;
+
 let db: Db;
 
 // middleware
@@ -46,6 +48,18 @@ app.post("/exercises", async (req, res) => {
     }
 });
 
+app.delete("/exercises/:id", async (req, res) => {
+    const query = { _id: new ObjectId(req.params.id) };
+    const collection = db.collection("exercises");
+    try {
+        console.log("deleting post with id ", req.params.id);
+        await collection.deleteOne(query);
+        return res.status(200).send();
+    } catch (e) {
+        return res.status(500).send();
+    }
+  });
+
 app.get("/suggestions", async (req, res) => {
     const collection = db.collection("suggestions");
     const result = await collection.find({}).toArray()
@@ -65,11 +79,24 @@ app.post("/suggestions", async (req, res) => {
     };
     try {
         await collection.insertOne(newPrompt);
+        console.log("inserted new prompt");
         return res.json(newPrompt);
     } catch (e) {
         return res.status(500).send();
     }
 });
+
+app.delete("/suggestions/:id", async (req, res) => {
+    const query = { _id: new ObjectId(req.params.id) };
+    const collection = db.collection("suggestions");
+    try {
+        console.log("deleting suggestion with id ", req.params.id);
+        await collection.deleteOne(query);
+        return res.status(200).send();
+    } catch (e) {
+        return res.status(500).send();
+    }
+  });
 
 // start the Express server
 function start() {

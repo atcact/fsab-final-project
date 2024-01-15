@@ -17,6 +17,7 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react';
 import axios from "axios";
+// import { error } from "console";
 
 // require("dotenv").config();
 
@@ -46,7 +47,7 @@ const NewPromptModal = ({ isOpen, onClose }: Props) => {
       headers: {
         accept: 'application/json', 
         'content-type': 'application/json', 
-        authorization: process.env.API_KEY
+        authorization: 'Bearer pDuCW23nZGCoPLO6Cxs4G6iTdoHCviFK88Ut3UrF'
       },
       data: {
         prompt: workoutPrompt,
@@ -59,15 +60,16 @@ const NewPromptModal = ({ isOpen, onClose }: Props) => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data)
+        console.log(response.data);
+        console.log(response.data.generations[0].text);
         setLLMOutput(response.data.generations[0].text);
       })
       .catch(function (error) {
-        console.error(error);
+        console.log(error);
       });
 
     axios
-      .post("http://localhost:8080/suggestion", {
+      .post("http://localhost:8080/suggestions", {
         ft: e.target.ft.value,
         in: e.target.in.value,
         lbs: e.target.lbs.value,
