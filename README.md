@@ -17,7 +17,14 @@ git clone https://github.com/atcact/workout-tracker.git
 Navigate to the project directory:
 
 ```bash
-cd workout-tracker/frontend
+cd workout-tracker/server
+npm install
+npm run start
+```
+
+In another terminal:
+```bash
+cd workout-tracker/client
 npm install
 npm run start
 ```
