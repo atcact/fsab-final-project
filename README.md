@@ -14,20 +14,13 @@ Clone the repository:
 git clone https://github.com/atcact/workout-tracker.git
 ```
 
-Navigate to the project directory:
+Install dependencies and run the app:
 
 ```bash
-cd workout-tracker/server
 npm install
-npm run start
+npm run watch
 ```
 
-In another terminal:
-```bash
-cd workout-tracker/client
-npm install
-npm run start
-```
 Open your web browser and visit http://localhost:3000 to access the app.
 
 ## Usage

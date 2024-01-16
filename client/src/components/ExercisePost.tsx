@@ -52,7 +52,7 @@ const ExercisePost = ({ _id, title, workout, time, body, postedAt }: ExercisePro
             {body}
           </Text>
           <Text fontSize="sm" fontWeight={400} fontStyle={"italic"}>
-            at 
+            {/* at {postedAt.getDay()}/{postedAt.getMonth() + 1}/{postedAt.getFullYear()} */}
             {/* at {postedAt.getHours().toString().padStart(2, "0")}:{postedAt.getMinutes().toString().padStart(2, "0")} on {postedAt.getDate()}/{postedAt.getMonth() + 1}/{postedAt.getFullYear()} */}
           </Text>
         </VStack>

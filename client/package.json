@@ -5,9 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prestart": "next build",
     "start": "next start",
     "lint": "next lint",
-    "idol": "next build && next start",
     "watch": "watch 'npm run build' ./src/components"
   },
   "dependencies": {

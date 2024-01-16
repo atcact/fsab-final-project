@@ -1,4 +1,9 @@
 {
+  "scripts": {
+    "server":"cd server && npm run start",
+    "client": "cd client && npm run start",
+    "watch": "npm run server & npm run client"
+  },
   "dependencies": {
     "mongodb": "^6.3.0"
   },
